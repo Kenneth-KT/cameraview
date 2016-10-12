@@ -209,7 +209,7 @@ class Camera1 extends CameraViewImpl {
             throw new IllegalStateException("Camera is not ready. Call start() before takePicture().");
         }
         if (getAutoFocus()) {
-            mCamera.cancelAutoFocus();
+            // mCamera.cancelAutoFocus();
             mCamera.autoFocus(new Camera.AutoFocusCallback() {
                 @Override
                 public void onAutoFocus(boolean success, Camera camera) {

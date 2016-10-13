@@ -209,6 +209,7 @@ class Camera1 extends CameraViewImpl {
             throw new IllegalStateException("Camera is not ready. Call start() before takePicture().");
         }
         if (getAutoFocus()) {
+            System.out.println("autoFocus()")
             // mCamera.cancelAutoFocus();
             mCamera.autoFocus(new Camera.AutoFocusCallback() {
                 @Override
@@ -222,10 +223,13 @@ class Camera1 extends CameraViewImpl {
     }
 
     private void takePictureInternal() {
+        System.out.println("takePictureInternal()")
         mCamera.takePicture(null, null, null, new Camera.PictureCallback() {
             @Override
             public void onPictureTaken(byte[] data, Camera camera) {
+                System.out.println("onPictureTaken()")
                 mCallback.onPictureTaken(data);
+                System.out.println("startPreview()")
                 camera.startPreview();
             }
         });

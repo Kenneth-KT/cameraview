@@ -210,7 +210,7 @@ class Camera1 extends CameraViewImpl {
         }
         if (getAutoFocus()) {
             System.out.println("autoFocus()");
-            // mCamera.cancelAutoFocus();
+            mCamera.cancelAutoFocus();
             mCamera.autoFocus(new Camera.AutoFocusCallback() {
                 @Override
                 public void onAutoFocus(boolean success, Camera camera) {

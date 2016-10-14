@@ -545,9 +545,9 @@ class Camera2 extends CameraViewImpl {
      */
     private void lockFocus() {
         try {
-            mPreviewRequestBuilder.set(CaptureRequest.CONTROL_AF_TRIGGER,
-                    CaptureRequest.CONTROL_AF_TRIGGER_IDLE);
-            mCaptureSession.setRepeatingRequest(mPreviewRequestBuilder.build(), null, null);
+            Camera.Parameters params = mCamera.getParameters();
+            params.setFocusMode("auto");
+            mCamera.setParameters(params);
 
             mPreviewRequestBuilder.set(CaptureRequest.CONTROL_AF_TRIGGER,
                     CaptureRequest.CONTROL_AF_TRIGGER_START);

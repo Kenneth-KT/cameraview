@@ -319,9 +319,12 @@ class Camera2 extends CameraViewImpl {
 
     @Override
     void takePicture() {
+        System.out.println("takePicture");
         if (mAutoFocus) {
+            System.out.println("lockFocus");
             lockFocus();
         } else {
+            System.out.println("captureStillPicture");
             captureStillPicture();
         }
     }
@@ -550,9 +553,11 @@ class Camera2 extends CameraViewImpl {
             mCaptureSession.setRepeatingRequest(mPreviewRequestBuilder.build(),
                             mCaptureCallback, null);
 
-            mPreviewRequestBuilder.set(CaptureRequest.CONTROL_AF_TRIGGER,
-                    CaptureRequest.CONTROL_AF_TRIGGER_START);
+        mPreviewRequestBuilder.set(CaptureRequest.CONTROL_AF_TRIGGER,
+                CaptureRequest.CONTROL_AF_TRIGGER_START);
+        try {
             mCaptureCallback.setState(PictureCaptureCallback.STATE_LOCKING);
+            System.out.println("capture()")
             mCaptureSession.capture(mPreviewRequestBuilder.build(), mCaptureCallback, null);
         } catch (CameraAccessException e) {
             Log.e(TAG, "Failed to lock focus.", e);

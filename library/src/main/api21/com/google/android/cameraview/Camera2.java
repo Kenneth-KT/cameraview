@@ -553,9 +553,9 @@ class Camera2 extends CameraViewImpl {
             mCaptureSession.setRepeatingRequest(mPreviewRequestBuilder.build(),
                             mCaptureCallback, null);
 
-        mPreviewRequestBuilder.set(CaptureRequest.CONTROL_AF_TRIGGER,
-                CaptureRequest.CONTROL_AF_TRIGGER_START);
-        try {
+            mPreviewRequestBuilder.set(CaptureRequest.CONTROL_AF_TRIGGER,
+                    CaptureRequest.CONTROL_AF_TRIGGER_START);
+
             mCaptureCallback.setState(PictureCaptureCallback.STATE_LOCKING);
             System.out.println("capture()");
             mCaptureSession.capture(mPreviewRequestBuilder.build(), mCaptureCallback, null);

@@ -69,6 +69,20 @@ public class CameraView extends FrameLayout {
     public @interface Flash {
     }
 
+    /** Automatically choose implementation according to SDK version. */
+    public static final int IMPLEMENTATION_AUTO = Constants.IMPLEMENTATION_AUTO;
+
+    /** Use only Camera1 implementation */
+    public static final int IMPLEMENTATION_CAMERA1 = Constants.IMPLEMENTATION_CAMERA1;
+
+    /** Use only Camera2 implementation */
+    public static final int IMPLEMENTATION_CAMERA2 = Constants.IMPLEMENTATION_CAMERA2;
+
+    /** Camera implementation */
+    @IntDef({IMPLEMENTATION_AUTO, IMPLEMENTATION_CAMERA1, IMPLEMENTATION_CAMERA2})
+    public @interface Implementation {
+    }
+
     private final CameraViewImpl mImpl;
 
     private final CallbackBridge mCallbacks;
@@ -96,14 +110,22 @@ public class CameraView extends FrameLayout {
             preview = new TextureViewPreview(context, this);
         }
         mCallbacks = new CallbackBridge();
-        if (Build.VERSION.SDK_INT < 21) {
+        // Attributes
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.CameraView, defStyleAttr,
+                R.style.Widget_CameraView);
+
+        int implOption = a.getInt(R.styleable.CameraView_implementation, IMPLEMENTATION_AUTO);
+
+        if (implOption == IMPLEMENTATION_AUTO) {
+            implOption = Build.VERSION.SDK_INT < 21 ? IMPLEMENTATION_CAMERA1 : IMPLEMENTATION_CAMERA2;
+        }
+        if (implOption == IMPLEMENTATION_CAMERA1) {
             mImpl = new Camera1(mCallbacks, preview);
         } else {
             mImpl = new Camera2(mCallbacks, preview, context);
         }
-        // Attributes
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.CameraView, defStyleAttr,
-                R.style.Widget_CameraView);
+        
+
         mAdjustViewBounds = a.getBoolean(R.styleable.CameraView_android_adjustViewBounds, false);
         setFacing(a.getInt(R.styleable.CameraView_facing, FACING_BACK));
         String aspectRatio = a.getString(R.styleable.CameraView_aspectRatio);

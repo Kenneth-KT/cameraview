@@ -30,4 +30,8 @@ interface Constants {
     int FLASH_AUTO = 3;
     int FLASH_RED_EYE = 4;
 
+    int IMPLEMENTATION_AUTO = 0;
+    int IMPLEMENTATION_CAMERA1 = 1;
+    int IMPLEMENTATION_CAMERA2 = 2;
+
 }

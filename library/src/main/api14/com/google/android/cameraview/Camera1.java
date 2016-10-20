@@ -185,7 +185,7 @@ class Camera1 extends CameraViewImpl {
             return mAutoFocus;
         }
         String focusMode = mCameraParameters.getFocusMode();
-        return focusMode != null && focusMode.contains("continuous");
+        return focusMode != null && focusMode.equals(Camera.Parameters.FOCUS_MODE_AUTO);
     }
 
     @Override

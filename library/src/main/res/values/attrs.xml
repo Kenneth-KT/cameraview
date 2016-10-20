@@ -54,5 +54,18 @@
             -->
             <enum name="redEye" value="4"/>
         </attr>
+        <!-- Camera implementation. -->
+        <attr name="implementation" format="enum">
+          <!--
+            Automatically choose implementation according to SDK version. (Default)
+            SDK level less than 21 will use Camera1 API.
+            SDK level greater than or equal to 21 will use Camera2 API.
+          -->
+          <enum name="auto" value="0"/>
+          <!-- Use only Camera1 implementation -->
+          <enum name="camera1" value="1"/>
+          <!-- Use only Camera2 implementation -->
+          <enum name="camera2" value="1"/>
+        </attr>
     </declare-styleable>
 </resources>
